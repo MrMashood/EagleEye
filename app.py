@@ -1,10 +1,11 @@
+import os
 import streamlit as st
 from PIL import Image
 from image_verifier import ImageVerifier
+from dotenv import load_dotenv
+load_dotenv()
 
-# Google Gemini API key
-GOOGLE_API_KEY = "AIzaSyDh4TIexagJMpv---zGy9k1xHHE7PuEt2o"
-
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 # Initialize verifier
 verifier = ImageVerifier(GOOGLE_API_KEY)
 
