@@ -83,13 +83,3 @@ if submit:
 
             else:
                 st.error(result["reasoning"])
-
-# Sidebar
-with st.sidebar:
-    st.header("ℹ️ About")
-    st.markdown("""
-    - Uses **BLIP-2 (open-source)**
-    - Runs fully **offline**
-    - No API keys required
-    - Designed for students and research
-    """)

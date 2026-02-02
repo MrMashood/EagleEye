@@ -1,62 +1,137 @@
-# 🦅 EagleEye: Product Image Verification System
+# 🦅 EagleEye: Product Image Verification System (BLIP-based)
 
 > [!IMPORTANT]
-> **PROTOTYPE**: This project is a functional prototype and proof-of-concept for an AI-powered e-commerce fraud detection system. It is not intended for production use without further development and security enhancements.
+> **PROTOTYPE / FYP PROJECT**  
+> This project is a functional prototype and proof-of-concept for an AI-powered e-commerce fraud detection system.  
+> It is intended for **academic, research, and learning purposes**, not direct production use.
 
-## Project Overview
+---
 
-**EagleEye** is an AI-driven tool designed to protect e-commerce platforms from fraud. It leverages the **Google Gemini API** to analyze product images and verify if they match their provided titles and categories.
+## 📌 Project Overview
 
-This system helps identify mismatches between what a seller describes and what the image actually shows, providing a confidence score and detailed reasoning for its verdict.
+**EagleEye** is an AI-driven tool designed to help detect potential fraud on e-commerce platforms by verifying whether a **product image matches the seller’s claimed title and category**.
 
-## Key Features
+Unlike API-based solutions, this system runs **fully offline** using an **open-source vision–language model (BLIP)**. This ensures:
 
-- 🔍 **Automated Image Analysis**: Uses Google Gemini Pro Vision to "see" and evaluate product images.
-- 📉 **Confidence Scoring**: Provides a 0-100% confidence score based on the match quality.
-- 🚦 **Visual Verdicts**: Clear color-coded results (Green/Yellow/Red) for quick decision making.
-- 📝 **AI Reasoning**: Detailed explanations from the AI explaining why a product was flagged or approved.
-- 💻 **Streamlit UI**: Simple and intuitive web interface for uploading and testing images.
+- No API keys
+- No usage costs
+- Full reproducibility for academic evaluation
 
-## Project Structure
+The system produces:
+- A **confidence score**
+- A **verdict** (Match / Uncertain / Mismatch)
+- A short **natural-language explanation**
 
-- `app.py`: The main Streamlit web application.
-- `image_verifier.py`: The core logic for interacting with the Google Gemini API.
-- `requirements.txt`: Python dependencies.
-- `.env`: Configuration for API keys (to be created from template).
+---
 
-## Getting Started
+## 🧠 Model Used
+
+- **Model**: `Salesforce/blip-vqa-base`
+- **Type**: Vision–Language Question Answering (VQA)
+- **Framework**: Hugging Face Transformers
+- **Execution**: CPU-only, local inference
+- **License**: Open-source (ungated)
+
+The model is prompted with structured questions such as:
+
+> *“Does this image show a PlayStation 5 that belongs to the Gaming Console category?”*
+
+---
+
+## ✨ Key Features
+
+- 🔍 **Image–Text Consistency Check**  
+  Verifies alignment between product image, title, and category.
+
+- 📊 **Confidence Scoring**  
+  Returns a confidence percentage (0–100%) derived from the model’s response.
+
+- 🚦 **Clear Verdicts**  
+  - ✅ Match  
+  - ⚠️ Uncertain  
+  - ❌ Mismatch  
+
+- 📝 **Explainable Output**  
+  Natural-language reasoning extracted from the BLIP model’s answer.
+
+- 💻 **Streamlit Web Interface**  
+  Simple UI for uploading images and testing product listings.
+
+- 🔐 **No API / Offline Execution**  
+  Runs entirely locally with no external service dependency.
+
+---
+
+## 🗂️ Project Structure
+
+```
+
+├── app.py               # Streamlit web application
+├── image_verifier.py    # BLIP-based image verification logic
+├── requirements.txt     # Pinned dependencies (uv / pip compatible)
+└── README.md            # Project documentation
+
+````
+
+---
+
+## ⚙️ Getting Started
 
 ### Prerequisites
 
-- Python 3.9 or higher
-- A Google Gemini API Key (get one at [Google AI Studio](https://aistudio.google.com/app/apikey))
+- Python **3.11** (recommended)
+- CPU (GPU not required)
+- Internet access (first run only, to download model weights)
 
-### Installation
+---
 
-1. Clone or download this repository.
-2. Create and activate a virtual environment (optional but recommended):
+### Installation (Recommended with `uv`)
+
+1. Clone the repository:
    ```bash
-   python -m venv .venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   ```
-3. Install the required packages:
-   ```bash
-   pip install -r requirements.txt
+   git clone <your-repo-url>
+   cd EagleEye
    ```
 
-### Configuration
+2. Create a virtual environment:
 
-1. Locate the `.env` file in the project root.
-2. Replace `your_api_key_here` with your actual Google API key.
+   ```bash
+   uv venv --python 3.11
+   .\.venv\Scripts\activate
+   ```
 
-### Running the App
+3. Install dependencies:
 
-Start the Streamlit server:
+   ```bash
+   uv pip install -r requirements.txt
+   ```
+
+---
+
+### Running the Application
+
 ```bash
 streamlit run app.py
 ```
-The app should automatically open in your default web browser.
 
-## Disclaimer
+The app will be available at:
 
-This prototype uses AI to make judgments. While powerful, AI can make mistakes (hallucinations or misidentifications). Always use human oversight for final fraud determinations.
+```
+http://localhost:8501
+```
+
+---
+
+## 🧪 How It Works (High Level)
+
+1. User uploads a product image
+2. User enters:
+
+   * Product title
+   * Product category
+3. The system:
+
+   * Asks a structured question to the BLIP VQA model
+   * Parses the model’s answer
+   * Assigns a confidence score and verdict
+4. Results are displayed with visual indicators
