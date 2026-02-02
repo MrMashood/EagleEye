@@ -1,3 +1,17 @@
-streamlit==1.31.0
-Pillow==10.2.0
-google-generativeai==0.3.2
+# Core app
+streamlit
+pillow
+
+# PyTorch (CPU only)
+torch
+torchvision
+
+# Hugging Face stack (PINNED – VERY IMPORTANT)
+transformers==4.38.2
+huggingface_hub==0.20.3
+tokenizers==0.15.2
+accelerate==0.27.2
+
+# Required by BLIP-2
+sentencepiece
+numpy
