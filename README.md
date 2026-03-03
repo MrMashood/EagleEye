@@ -2,9 +2,7 @@
 
 > [!IMPORTANT]
 > **PROTOTYPE / FYP PROJECT**  
-> This project is a functional prototype and proof-of-concept for an AI-powered e-commerce fraud detection system.  
-> It is intended for **academic, research, and learning purposes**, not direct production use.
-
+> This project is a functional prototype and proof-of-concept for an AI-powered e-commerce fraud detection system.
 ---
 
 ## 📌 Project Overview
