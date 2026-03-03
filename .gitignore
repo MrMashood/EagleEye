@@ -1,0 +1,17 @@
+# Python environment settings
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables
+.env
+
+# Streamlit settings
+.streamlit/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+/test_images
+/logs
